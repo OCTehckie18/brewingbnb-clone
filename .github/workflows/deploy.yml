@@ -32,5 +32,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
           server-dir: ./public_html/ # Adjust if you want to deploy to a subdirectory
-          protocol: ftps
+          protocol: ftp
           strict: false # Set to true if you have a valid SSL certificate for FTP
