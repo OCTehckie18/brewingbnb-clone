@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import useTheme from '../../hooks/useTheme';
+import { useTheme } from '../../hooks/useTheme';
 
 const Header = ({ isMenuOpen, toggleMenu, toggleSearch, closeMenu }) => {
     const { theme, toggleTheme } = useTheme();

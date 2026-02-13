@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import 'remixicon/fonts/remixicon.css'
 import App from './App.jsx'
-import { ThemeProvider } from './hooks/useTheme'
+import { ThemeProvider } from './hooks/useTheme.jsx'
 import { BlogProvider } from './context/BlogContext.jsx'
 
 createRoot(document.getElementById('root')).render(
