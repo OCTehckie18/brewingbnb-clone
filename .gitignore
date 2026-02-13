@@ -20,6 +20,13 @@ dist
 dist-ssr
 *.local
 
+# Legacy / Original Static Site
+/BnB Website/
+/assets/
+/post.html
+/*.jpg
+
+
 # Environment variables
 .env
 .env.local
