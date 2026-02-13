@@ -57,6 +57,16 @@
 
 @layer components {
 
+  /* Reusable classes */
+  .container {
+    @apply mx-auto px-6;
+    max-width: 1600px !important;
+  }
+
+  .section:not(.featured-articles) {
+    @apply py-20;
+  }
+
   /* Reusable component classes */
   .btn {
     @apply cursor-pointer inline-flex items-center justify-center transition-colors duration-200;
