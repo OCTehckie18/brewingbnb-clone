@@ -33,4 +33,4 @@ jobs:
           local-dir: ./dist/
           server-dir: ./public_html/ # Adjust if you want to deploy to a subdirectory
           protocol: ftp
-          strict: false # Set to true if you have a valid SSL certificate for FTP
+
