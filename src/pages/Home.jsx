@@ -13,7 +13,7 @@ const Home = () => {
 
     return (
         <>
-            <section className="py-8 mt-4 md:mt-8">
+            <section className="pb-8 pt-4">
                 <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <FeaturedContent />
                     <TrendingSidebar />

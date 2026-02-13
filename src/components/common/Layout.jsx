@@ -22,7 +22,7 @@ const Layout = () => {
                 closeMenu={closeMenu}
             />
             {isSearchOpen && <SearchOverlay onClose={closeSearch} />}
-            <main className="flex-grow pt-[8.5rem]">
+            <main className="flex-grow pt-24">
                 <Outlet />
             </main>
             <Footer />
