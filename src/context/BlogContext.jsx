@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Change this to your actual Hostinger domain after uploading PHP files
 // Example: https://yourdomain.com/api
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost/brewing-bnb-backend";
+const API_URL = import.meta.env.VITE_API_URL || "https://brewingbnb.com/api";
 
 const BlogContext = createContext();
 

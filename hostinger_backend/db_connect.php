@@ -4,9 +4,9 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 $host = "localhost";
-$username = "u123456789_admin"; // Change this to your Hostinger DB user
-$password = "YourDBPassword"; // Change this to your Hostinger DB password
-$dbname = "u123456789_brewingbnb"; // Change this to your Hostinger DB name
+$username = "u402609842_admin"; // Change this to your Hostinger DB user
+$password = "#Succession77"; // Change this to your Hostinger DB password
+$dbname = "u402609842_brewingbnb"; // Change this to your Hostinger DB name
 
 $conn = new mysqli($host, $username, $password, $dbname);
 

@@ -22,5 +22,6 @@ CREATE TABLE IF NOT EXISTS posts (
 
 -- Insert Default Admin User (Password is: admin123)
 -- You must change this password hash for production!
-INSERT INTO users (username, password) VALUES ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
--- add sonali's data HERE
+INSERT INTO users (username, password) VALUES ('admin', '#Succession77');
+-- added sonali's data HERE
+-- #sUCCESSION771 - ftp PASSWORD
