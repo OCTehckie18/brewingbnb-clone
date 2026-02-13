@@ -31,7 +31,7 @@ const FeaturedContent = () => {
                 const className = isFullWidthKey ? "md:col-span-2" : "";
 
                 return (
-                    <Link to="/post" key={article.id} className={`relative group overflow-hidden rounded-lg shadow-lg aspect-[4/3] ${className}`}>
+                    <Link to={`/post/${article.id}`} key={article.id} className={`relative group overflow-hidden rounded-lg shadow-lg aspect-[4/3] ${className}`}>
                         <img src={article.image_url || "/assets/images/featured/featured-1.jpg"} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                         <span className="absolute top-4 right-4 bg-[var(--primary-background-color)] text-[var(--light-color)] text-xs font-bold uppercase px-3 py-1 z-20">{article.category}</span>
                         <div className="article-data-container group-hover:bg-[var(--hover-dark-color)]">

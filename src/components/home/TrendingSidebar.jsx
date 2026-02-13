@@ -17,7 +17,7 @@ const TrendingSidebar = () => {
 
             <div className="flex flex-col gap-5">
                 {displayPosts.map((post, index) => (
-                    <Link to="/post" key={post.id} className="flex flex-col sm:flex-row gap-4 group border-b border-[var(--transparent-light-color)] pb-6 last:border-0 last:pb-0">
+                    <Link to={`/post/${post.id}`} key={post.id} className="flex flex-col sm:flex-row gap-4 group border-b border-[var(--transparent-light-color)] pb-6 last:border-0 last:pb-0">
                         <div className="relative w-full sm:w-24 h-24 flex-shrink-0 overflow-hidden rounded-md">
                             <span className="absolute -top-2 -left-2 w-8 h-8 bg-[var(--primary-background-color)] text-[var(--light-color)] flex items-center justify-center rounded-full text-xs font-bold z-10 shadow-md">0{index + 1}</span>
                             <img src={post.image_url || `/assets/images/trending/trending_${index + 1}.jpg`} alt="" className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />

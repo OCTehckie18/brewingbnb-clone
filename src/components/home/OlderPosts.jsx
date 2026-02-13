@@ -19,7 +19,7 @@ const OlderPosts = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {displayPosts.map((post) => (
-                        <Link to="/post" key={post.id} className="flex flex-col bg-[var(--secondary-background-color)] rounded-lg overflow-hidden group shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <Link to={`/post/${post.id}`} key={post.id} className="flex flex-col bg-[var(--secondary-background-color)] rounded-lg overflow-hidden group shadow-md hover:shadow-xl transition-shadow duration-300">
                             <div className="relative h-64 overflow-hidden">
                                 <img src={post.image_url || "/assets/images/older_posts/older_posts_1.jpg"} alt="" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                             </div>

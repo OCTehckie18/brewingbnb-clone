@@ -116,6 +116,27 @@ export const BlogProvider = ({ children }) => {
         }
     }
 
+    const deletePost = async (id) => {
+        try {
+            const response = await fetch(`${API_URL}/delete_post.php`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id })
+            });
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                setPosts(posts.filter(p => p.id !== id));
+                return true;
+            } else {
+                throw new Error(result.message);
+            }
+        } catch (error) {
+            console.error("Delete error:", error);
+            throw error;
+        }
+    };
+
     const value = {
         posts,
         featuredPosts,
@@ -126,7 +147,8 @@ export const BlogProvider = ({ children }) => {
         login,
         logout,
         createPost,
-        uploadImage
+        uploadImage,
+        deletePost
     };
 
     return <BlogContext.Provider value={value}>{children}</BlogContext.Provider>;
