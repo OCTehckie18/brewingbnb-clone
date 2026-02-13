@@ -2,7 +2,7 @@ import React from 'react';
 
 const Newsletter = () => {
     return (
-        <section className="py-20 bg-[var(--primary-background-color)] border-t border-[var(--secondary-background-color)]">
+        <section className="py-20 bg-[var(--primary-background-color)]">
             <div className="container mx-auto px-6 max-w-4xl text-center">
                 <h2 className="text-3xl lg:text-4xl font-bold text-[var(--light-color)] mb-6">Subscribe to Brewing BnB</h2>
                 <p className="text-[var(--light-color-alt)] mb-10 max-w-xl mx-auto">

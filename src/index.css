@@ -78,19 +78,20 @@
   }
 
   .fancy-border {
-    @apply relative overflow-hidden;
+    @apply relative overflow-hidden z-10;
   }
 
   .fancy-border::before {
     content: "";
-    @apply absolute top-0 left-0 w-[200%] h-full z-0;
+    @apply absolute top-0 left-0 w-[200%] h-full z-[-1];
     background: linear-gradient(115deg, #4fcf70, #fad648, #a767e5, #12bcfe, #44ce7b);
     background-size: 50% 100%;
   }
 
   .fancy-border span {
-    @apply relative z-10 inline-flex px-6 py-2;
+    @apply relative z-10 inline-flex items-center justify-center px-4 py-2 uppercase;
     background-color: var(--secondary-background-color);
+    margin: 2px;
   }
 
   .article-data-container {

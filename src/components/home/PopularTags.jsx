@@ -19,7 +19,7 @@ const PopularTags = () => {
                     <span className="absolute top-[-1.5rem] left-[1rem] text-[5rem] text-[var(--light-color)] opacity-5 hidden md:block">Popular tags</span>
                 </h2>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
                     {tags.map((tag) => (
                         <Link to="/post" key={tag.name} className="relative group overflow-hidden rounded-lg aspect-square">
                             <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-[var(--transparent-dark-color)] text-[var(--light-color)] px-4 py-2 font-bold uppercase tracking-wider backdrop-blur-sm group-hover:text-[var(--hover-light-color)] transition-colors">#{tag.name}</span>
