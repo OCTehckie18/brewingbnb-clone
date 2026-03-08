@@ -46,9 +46,10 @@ function App() {
           }
         />
 
-        {/* Placeholders for links */}
+        {/* Placeholders for links 
         <Route path="signin" element={<div className="container mx-auto py-20 text-center text-[var(--light-color)]">Sign In Page Placeholder</div>} />
         <Route path="signup" element={<div className="container mx-auto py-20 text-center text-[var(--light-color)]">Sign Up Page Placeholder</div>} />
+        */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

@@ -59,13 +59,14 @@ const Header = ({ isMenuOpen, toggleMenu, toggleSearch, closeMenu }) => {
                                 </div>
                             </li>
                         )}
-                        {/* Hidden on Large screens in original, only for mobile menu */}
+                        {/* Hidden on Large screens in original, only for mobile menu 
                         <li className="lg:hidden">
                             <Link to="/signin" className="uppercase text-sm tracking-widest hover:text-[var(--light-color)] transition-colors">Sign in</Link>
                         </li>
                         <li className="lg:hidden">
                             <Link to="/signup" className="uppercase text-sm tracking-widest hover:text-[var(--light-color)] transition-colors">Sign up</Link>
                         </li>
+                        */}
                     </ul>
                 </div>
 
@@ -82,10 +83,12 @@ const Header = ({ isMenuOpen, toggleMenu, toggleSearch, closeMenu }) => {
                         <i className={`ri-${isMenuOpen ? 'close' : 'menu-3'}-line`}></i>
                     </button>
 
+                    {/* 
                     <Link to="/signin" className="hidden sm:block uppercase text-sm tracking-widest hover:text-[var(--light-color)] transition-colors">Sign in</Link>
                     <Link to="/signup" className="hidden sm:inline-flex btn fancy-border">
                         <span className="uppercase text-sm tracking-widest">Sign up</span>
                     </Link>
+                    */}
                 </div>
             </nav>
         </header>
