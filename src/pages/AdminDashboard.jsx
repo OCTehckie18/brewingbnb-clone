@@ -199,7 +199,7 @@ const AdminDashboard = () => {
                                 </div>
 
                                 <div>
-                                    <label className="block text-[var(--light-color-alt)] text-sm mb-2">Image - variable</label>
+                                    <label className="block text-[var(--light-color-alt)] text-sm mb-2">Image - in DEVELOPMENT</label>
                                     <input
                                         type="file"
                                         accept="image/*"
