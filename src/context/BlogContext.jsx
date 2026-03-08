@@ -167,6 +167,27 @@ export const BlogProvider = ({ children }) => {
         }
     };
 
+    const updatePostStatus = async (id, statusUpdates) => {
+        try {
+            const response = await fetch(`${API_URL}/update_post_status.php`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, ...statusUpdates })
+            });
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                setPosts(posts.map(p => p.id === id ? { ...p, ...statusUpdates } : p));
+                return true;
+            } else {
+                throw new Error(result.message);
+            }
+        } catch (error) {
+            console.error("Update status error:", error);
+            throw error;
+        }
+    };
+
     const value = {
         posts,
         featuredPosts,
@@ -179,6 +200,7 @@ export const BlogProvider = ({ children }) => {
         createPost,
         uploadImage,
         deletePost,
+        updatePostStatus,
         breakingNews,
         updateBreakingNews
     };

@@ -4,7 +4,7 @@ import { useBlog } from '../context/BlogContext';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
-    const { createPost, uploadImage, user, logout, posts, deletePost, breakingNews, updateBreakingNews } = useBlog();
+    const { createPost, uploadImage, user, logout, posts, deletePost, breakingNews, updateBreakingNews, updatePostStatus } = useBlog();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [category, setCategory] = useState('Technology');
@@ -79,6 +79,14 @@ const AdminDashboard = () => {
             } catch (error) {
                 alert("Failed to delete post: " + error.message);
             }
+        }
+    };
+
+    const handleToggleStatus = async (id, field, currentValue) => {
+        try {
+            await updatePostStatus(id, { [field]: currentValue ? 0 : 1 });
+        } catch (error) {
+            alert("Failed to update post status: " + error.message);
         }
     };
 
@@ -224,27 +232,49 @@ const AdminDashboard = () => {
                         <div className="space-y-4 max-h-[800px] overflow-y-auto pr-2 custom-scrollbar">
                             {posts.length > 0 ? (
                                 posts.map(post => (
-                                    <div key={post.id} className="flex justify-between items-center p-4 bg-[var(--primary-background-color)] rounded border border-[var(--transparent-light-color)] hover:border-[var(--light-color)] transition-colors">
-                                        <div className="flex-1 mr-4">
-                                            <h3 className="text-[var(--light-color)] font-bold line-clamp-1">{post.title}</h3>
-                                            <p className="text-xs text-[var(--light-color-alt)] mt-1">{new Date(post.created_at).toLocaleDateString()}</p>
+                                    <div key={post.id} className="flex flex-col p-4 bg-[var(--primary-background-color)] rounded border border-[var(--transparent-light-color)] hover:border-[var(--light-color)] transition-colors">
+                                        <div className="flex justify-between items-start w-full">
+                                            <div className="flex-1 mr-4">
+                                                <h3 className="text-[var(--light-color)] font-bold line-clamp-1">{post.title}</h3>
+                                                <p className="text-xs text-[var(--light-color-alt)] mt-1">{new Date(post.created_at).toLocaleDateString()}</p>
+                                            </div>
+                                            <div className="flex">
+                                                <Link
+                                                    to={`/post/${post.id}`}
+                                                    className="text-blue-400 hover:text-blue-300 ml-2 p-2 rounded hover:bg-blue-900/20 transition-colors"
+                                                    title="View Post"
+                                                    target="_blank"
+                                                >
+                                                    <i className="ri-eye-line text-xl"></i>
+                                                </Link>
+                                                <button
+                                                    onClick={() => handleDelete(post.id)}
+                                                    className="text-red-400 hover:text-red-300 ml-2 p-2 rounded hover:bg-red-900/20 transition-colors"
+                                                    title="Delete Post"
+                                                >
+                                                    <i className="ri-delete-bin-line text-xl"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div className="flex">
-                                            <Link
-                                                to={`/post/${post.id}`}
-                                                className="text-blue-400 hover:text-blue-300 ml-2 p-2 rounded hover:bg-blue-900/20 transition-colors"
-                                                title="View Post"
-                                                target="_blank"
-                                            >
-                                                <i className="ri-eye-line text-xl"></i>
-                                            </Link>
-                                            <button
-                                                onClick={() => handleDelete(post.id)}
-                                                className="text-red-400 hover:text-red-300 ml-2 p-2 rounded hover:bg-red-900/20 transition-colors"
-                                                title="Delete Post"
-                                            >
-                                                <i className="ri-delete-bin-line text-xl"></i>
-                                            </button>
+                                        <div className="flex gap-4 mt-3 pt-3 border-t border-[var(--transparent-light-color)]">
+                                            <label className="flex items-center gap-2 cursor-pointer text-[var(--light-color-alt)] hover:text-[var(--light-color)] transition-colors">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={post.is_featured == 1}
+                                                    onChange={() => handleToggleStatus(post.id, 'is_featured', post.is_featured == 1)}
+                                                    className="w-4 h-4 accent-[var(--light-color)]"
+                                                />
+                                                <span className="text-xs">Featured</span>
+                                            </label>
+                                            <label className="flex items-center gap-2 cursor-pointer text-[var(--light-color-alt)] hover:text-[var(--light-color)] transition-colors">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={post.is_trending == 1}
+                                                    onChange={() => handleToggleStatus(post.id, 'is_trending', post.is_trending == 1)}
+                                                    className="w-4 h-4 accent-[var(--light-color)]"
+                                                />
+                                                <span className="text-xs">Trending</span>
+                                            </label>
                                         </div>
                                     </div>
                                 ))
