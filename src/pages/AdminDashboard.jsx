@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useBlog } from '../context/BlogContext';
 
 const AdminDashboard = () => {
@@ -161,13 +161,23 @@ const AdminDashboard = () => {
                                             <h3 className="text-[var(--light-color)] font-bold line-clamp-1">{post.title}</h3>
                                             <p className="text-xs text-[var(--light-color-alt)] mt-1">{new Date(post.created_at).toLocaleDateString()}</p>
                                         </div>
-                                        <button
-                                            onClick={() => handleDelete(post.id)}
-                                            className="text-red-400 hover:text-red-300 ml-2 p-2 rounded hover:bg-red-900/20 transition-colors"
-                                            title="Delete Post"
-                                        >
-                                            <i className="ri-delete-bin-line text-xl"></i>
-                                        </button>
+                                        <div className="flex">
+                                            <Link
+                                                to={`/post/${post.id}`}
+                                                className="text-blue-400 hover:text-blue-300 ml-2 p-2 rounded hover:bg-blue-900/20 transition-colors"
+                                                title="View Post"
+                                                target="_blank"
+                                            >
+                                                <i className="ri-eye-line text-xl"></i>
+                                            </Link>
+                                            <button
+                                                onClick={() => handleDelete(post.id)}
+                                                className="text-red-400 hover:text-red-300 ml-2 p-2 rounded hover:bg-red-900/20 transition-colors"
+                                                title="Delete Post"
+                                            >
+                                                <i className="ri-delete-bin-line text-xl"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 ))
                             ) : (

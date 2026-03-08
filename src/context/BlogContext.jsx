@@ -10,11 +10,13 @@ export const useBlog = () => useContext(BlogContext);
 
 export const BlogProvider = ({ children }) => {
     const [posts, setPosts] = useState([]);
-    const [featuredPosts, setFeaturedPosts] = useState([]);
-    const [trendingPosts, setTrendingPosts] = useState([]);
-    const [latestPosts, setLatestPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null); // Host/Admin user
+
+    // Derived states
+    const featuredPosts = posts.filter(p => p.is_featured == 1).slice(0, 3);
+    const trendingPosts = posts.filter(p => p.is_trending == 1).slice(0, 5);
+    const latestPosts = posts.slice(0, 6);
 
     // Fetch initial data
     useEffect(() => {
@@ -26,10 +28,6 @@ export const BlogProvider = ({ children }) => {
 
                 if (Array.isArray(data)) {
                     setPosts(data);
-                    // Simple logic to split posts for different sections
-                    setFeaturedPosts(data.filter(p => p.is_featured == 1).slice(0, 3));
-                    setTrendingPosts(data.filter(p => p.is_trending == 1).slice(0, 5));
-                    setLatestPosts(data.slice(0, 6));
                 } else {
                     console.error("API Error:", data);
                     setPosts([]);
