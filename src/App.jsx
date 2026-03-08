@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import Post from './pages/Post';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
+import Search from './pages/Search';
+import Category from './pages/Category';
 import { useBlog } from './context/BlogContext';
 
 // Protected Route Component
@@ -27,8 +29,11 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="index.html" element={<Navigate to="/" replace />} />
-        <Route path="post" element={<Post />} />
-        <Route path="post.html" element={<Navigate to="/post" replace />} />
+        <Route path="post/:id" element={<Post />} />
+        <Route path="post" element={<Navigate to="/" replace />} />
+        <Route path="post.html" element={<Navigate to="/" replace />} />
+        <Route path="search" element={<Search />} />
+        <Route path="category/:categoryName" element={<Category />} />
 
         {/* Admin Routes */}
         <Route path="admin/login" element={<AdminLogin />} />

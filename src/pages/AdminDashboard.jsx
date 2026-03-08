@@ -99,17 +99,25 @@ const AdminDashboard = () => {
 
                             <div>
                                 <label className="block text-[var(--light-color-alt)] text-sm mb-2">Category</label>
-                                <select
+                                <input
+                                    list="category-options"
+                                    type="text"
                                     value={category}
                                     onChange={(e) => setCategory(e.target.value)}
                                     className="w-full bg-[var(--primary-background-color)] border border-[var(--transparent-light-color)] text-[var(--light-color)] rounded p-3 focus:outline-none focus:border-[var(--light-color)]"
-                                >
-                                    <option value="Technology">Technology</option>
-                                    <option value="Food">Food</option>
-                                    <option value="Health">Health</option>
-                                    <option value="Travel">Travel</option>
-                                    <option value="Lifestyle">Lifestyle</option>
-                                </select>
+                                    required
+                                    placeholder="Select or type a new category"
+                                />
+                                <datalist id="category-options">
+                                    {Array.from(new Set(posts.map(post => post.category).filter(Boolean))).map((cat, index) => (
+                                        <option key={index} value={cat} />
+                                    ))}
+                                    <option value="Technology" />
+                                    <option value="Food" />
+                                    <option value="Health" />
+                                    <option value="Travel" />
+                                    <option value="Lifestyle" />
+                                </datalist>
                             </div>
 
                             <div>

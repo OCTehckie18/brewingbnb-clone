@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SearchOverlay = ({ onClose }) => {
     const inputRef = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (inputRef.current) {
@@ -17,6 +19,15 @@ const SearchOverlay = ({ onClose }) => {
         return () => window.removeEventListener('keydown', handleEsc);
     }, [onClose]);
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const query = inputRef.current.value.trim();
+        if (query) {
+            navigate(`/search?q=${encodeURIComponent(query)}`);
+            onClose();
+        }
+    };
+
     return (
         <div className="fixed inset-0 bg-[var(--primary-background-color)] z-[9999] flex flex-col items-center justify-center p-6 animate-fade-in">
             <button
@@ -27,10 +38,10 @@ const SearchOverlay = ({ onClose }) => {
             </button>
 
             <div className="w-full max-w-3xl text-center space-y-8">
-                <form className="flex items-center border-b-2 border-[var(--secondary-background-color)] pb-4">
+                <form onSubmit={handleSubmit} className="flex items-center border-b-2 border-[var(--secondary-background-color)] pb-4">
                     <input
                         ref={inputRef}
-                        type="text"
+                        type="search"
                         placeholder="What are you looking for?"
                         className="w-full bg-transparent text-3xl text-[var(--light-color)] placeholder-[var(--light-color-alt)] focus:outline-none"
                     />

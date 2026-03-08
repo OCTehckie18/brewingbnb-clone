@@ -13,6 +13,11 @@ const Post = () => {
             // loose comparison for string vs number id
             const foundPost = posts.find(p => p.id == id);
             setPost(foundPost);
+            if (foundPost) {
+                document.title = `${foundPost.title} | Brewing BnB`;
+            } else {
+                document.title = "Post Not Found | Brewing BnB";
+            }
         }
     }, [id, posts]);
 
@@ -27,7 +32,9 @@ const Post = () => {
 
                 {/* Post Header */}
                 <div className="flex flex-col items-center text-center mb-12">
-                    <span className="bg-[var(--primary-background-color)] text-[var(--light-color)] text-xs font-bold uppercase px-3 py-1 mb-4 rounded">{post.category}</span>
+                    <Link to={`/category/${post.category}`} className="bg-[var(--primary-background-color)] text-[var(--light-color)] text-xs font-bold uppercase px-3 py-1 mb-4 rounded hover:bg-[var(--secondary-background-color)] transition-colors">
+                        {post.category}
+                    </Link>
                     <h1 className="text-3xl md:text-5xl font-bold text-[var(--light-color)] mb-6 leading-tight">{post.title}</h1>
                     <div className="flex items-center text-sm text-[var(--light-color-alt)] mb-8 gap-4">
                         <span>{new Date(post.created_at).toLocaleDateString()}</span>

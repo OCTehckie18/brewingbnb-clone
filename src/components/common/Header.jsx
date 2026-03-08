@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
+import { useBlog } from '../../context/BlogContext';
 
 const Header = ({ isMenuOpen, toggleMenu, toggleSearch, closeMenu }) => {
     const { theme, toggleTheme } = useTheme();
     const location = useLocation();
     const [isScrolled, setIsScrolled] = useState(false);
+    const { posts } = useBlog();
+
+    // Extract unique categories
+    const categories = Array.from(new Set(posts.map(post => post.category).filter(Boolean)));
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -37,6 +43,22 @@ const Header = ({ isMenuOpen, toggleMenu, toggleSearch, closeMenu }) => {
                         <li>
                             <Link to="/" className={`uppercase text-sm tracking-widest hover:text-[var(--light-color)] transition-colors ${location.pathname === '/' ? 'text-[var(--light-color)]' : ''}`}>Home</Link>
                         </li>
+                        {categories.length > 0 && (
+                            <li className="relative group lg:py-4 cursor-pointer"
+                                onMouseEnter={() => setIsDropdownOpen(true)}
+                                onMouseLeave={() => setIsDropdownOpen(false)}>
+                                <span className={`uppercase text-sm tracking-widest hover:text-[var(--light-color)] transition-colors flex items-center gap-1 ${location.pathname.startsWith('/category') ? 'text-[var(--light-color)]' : ''}`}>
+                                    Categories <i className="ri-arrow-down-s-line"></i>
+                                </span>
+                                <div className={`absolute top-full left-0 mt-2 w-48 bg-[var(--secondary-background-color)] rounded-md shadow-lg py-2 z-50 transition-all duration-300 ${isDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
+                                    {categories.map((cat, idx) => (
+                                        <Link key={idx} to={`/category/${cat}`} className="block px-4 py-2 text-sm text-[var(--light-color-alt)] hover:text-[var(--light-color)] hover:bg-[var(--primary-background-color)]">
+                                            {cat}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </li>
+                        )}
                         {/* Hidden on Large screens in original, only for mobile menu */}
                         <li className="lg:hidden">
                             <Link to="/signin" className="uppercase text-sm tracking-widest hover:text-[var(--light-color)] transition-colors">Sign in</Link>
