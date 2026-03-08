@@ -11,6 +11,7 @@ const AdminDashboard = () => {
     const [imageFile, setImageFile] = useState(null);
     const [isFeatured, setIsFeatured] = useState(false);
     const [isTrending, setIsTrending] = useState(false);
+    const [readTime, setReadTime] = useState('5');
     const [headlineContent, setHeadlineContent] = useState('');
     const [settingsMessage, setSettingsMessage] = useState('');
     const [uploading, setUploading] = useState(false);
@@ -53,7 +54,7 @@ const AdminDashboard = () => {
                 category,
                 image_url: imageUrl,
                 created_at: new Date().toISOString(),
-                read_time: '5 Min read',
+                read_time: `${readTime} Min read`,
                 is_featured: isFeatured ? 1 : 0,
                 is_trending: isTrending ? 1 : 0
             });
@@ -64,6 +65,7 @@ const AdminDashboard = () => {
             setImageFile(null);
             setIsFeatured(false);
             setIsTrending(false);
+            setReadTime('5');
         } catch (error) {
             setMessage(`Error: ${error.message}`);
         } finally {
@@ -182,6 +184,18 @@ const AdminDashboard = () => {
                                         className="w-full bg-[var(--primary-background-color)] border border-[var(--transparent-light-color)] text-[var(--light-color)] rounded p-3 h-40 focus:outline-none focus:border-[var(--light-color)]"
                                         required
                                     ></textarea>
+                                </div>
+
+                                <div>
+                                    <label className="block text-[var(--light-color-alt)] text-sm mb-2">Read Time (minutes)</label>
+                                    <input
+                                        type="number"
+                                        min="1"
+                                        value={readTime}
+                                        onChange={(e) => setReadTime(e.target.value)}
+                                        className="w-full bg-[var(--primary-background-color)] border border-[var(--transparent-light-color)] text-[var(--light-color)] rounded p-3 focus:outline-none focus:border-[var(--light-color)]"
+                                        required
+                                    />
                                 </div>
 
                                 <div>
