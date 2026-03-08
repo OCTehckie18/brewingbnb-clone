@@ -24,7 +24,7 @@ export const BlogProvider = ({ children }) => {
         const fetchPosts = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`${API_URL}/get_posts.php`);
+                const response = await fetch(`${API_URL}/get_posts.php?t=${new Date().getTime()}`);
                 const data = await response.json();
 
                 if (Array.isArray(data)) {
@@ -39,7 +39,7 @@ export const BlogProvider = ({ children }) => {
             }
 
             try {
-                const settingsRes = await fetch(`${API_URL}/get_settings.php`);
+                const settingsRes = await fetch(`${API_URL}/get_settings.php?t=${new Date().getTime()}`);
                 const settings = await settingsRes.json();
                 if (settings.breaking_news) {
                     setBreakingNews(settings.breaking_news);
