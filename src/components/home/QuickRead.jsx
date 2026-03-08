@@ -5,7 +5,15 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+import { useBlog } from '../../context/BlogContext';
+import { Link } from 'react-router-dom';
+
 const QuickRead = () => {
+    const { latestPosts } = useBlog();
+
+    // Use dummy array if no posts yet to show skeleton or default images
+    const displayPosts = latestPosts.length > 0 ? latestPosts : [1, 2, 3, 4, 5, 6];
+
     return (
         <section className="py-12 bg-[var(--primary-background-color)]">
             <div className="container mx-auto px-6">
@@ -30,21 +38,30 @@ const QuickRead = () => {
                     }}
                     className="pb-12"
                 >
-                    {[1, 2, 3, 4, 5, 6].map((item) => (
-                        <SwiperSlide key={item}>
-                            <div className="relative group overflow-hidden rounded-lg shadow-lg h-[25rem] md:h-[30rem]">
-                                <img src={`/assets/images/quick_read/quick_read_${item}.jpg`} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 to-transparent z-10">
-                                    <div className="flex items-center text-xs text-gray-300 mb-2 gap-2">
-                                        <span>23 Dec 2024</span>
-                                        <span className="w-1.5 h-1.5 bg-gray-300 rotate-45"></span>
-                                        <span>3 Min read</span>
+                    {displayPosts.map((post, index) => {
+                        const isDynamic = typeof post !== 'number';
+                        const id = isDynamic ? post.id : index;
+                        const title = isDynamic ? post.title : "Sample article title";
+                        const date = isDynamic ? new Date(post.created_at).toLocaleDateString() : "23 Dec 2024";
+                        const image = isDynamic && post.image_url ? post.image_url : `/assets/images/quick_read/quick_read_${(index % 6) + 1}.jpg`;
+                        const readTime = isDynamic ? post.read_time : "3 Min read";
+
+                        return (
+                            <SwiperSlide key={id}>
+                                <Link to={isDynamic ? `/post/${id}` : '/'} className="relative group overflow-hidden rounded-lg shadow-lg h-[25rem] md:h-[30rem] block">
+                                    <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                    <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 to-transparent z-10">
+                                        <div className="flex items-center text-xs text-gray-300 mb-2 gap-2">
+                                            <span>{date}</span>
+                                            <span className="w-1.5 h-1.5 bg-gray-300 rotate-45"></span>
+                                            <span>{readTime}</span>
+                                        </div>
+                                        <h3 className="text-lg font-bold text-white group-hover:text-[var(--hover-light-color)] transition-colors line-clamp-2">{title}</h3>
                                     </div>
-                                    <h3 className="text-lg font-bold text-white group-hover:text-[var(--hover-light-color)] transition-colors">Sample article title</h3>
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                    ))}
+                                </Link>
+                            </SwiperSlide>
+                        );
+                    })}
                 </Swiper>
             </div>
         </section>

@@ -12,6 +12,7 @@ export const BlogProvider = ({ children }) => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null); // Host/Admin user
+    const [breakingNews, setBreakingNews] = useState("Loading...");
 
     // Derived states
     const featuredPosts = posts.filter(p => p.is_featured == 1).slice(0, 3);
@@ -35,6 +36,17 @@ export const BlogProvider = ({ children }) => {
             } catch (error) {
                 console.error('Error fetching posts:', error);
                 setPosts([]);
+            }
+
+            try {
+                const settingsRes = await fetch(`${API_URL}/get_settings.php`);
+                const settings = await settingsRes.json();
+                if (settings.breaking_news) {
+                    setBreakingNews(settings.breaking_news);
+                }
+            } catch (error) {
+                console.error('Error fetching settings:', error);
+                setBreakingNews("Welcome to Brewing BnB!");
             } finally {
                 setLoading(false);
             }
@@ -135,6 +147,26 @@ export const BlogProvider = ({ children }) => {
         }
     };
 
+    const updateBreakingNews = async (headline) => {
+        try {
+            const response = await fetch(`${API_URL}/update_settings.php`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ breaking_news: headline })
+            });
+            const result = await response.json();
+            if (result.status === 'success') {
+                setBreakingNews(headline);
+                return true;
+            } else {
+                throw new Error(result.message);
+            }
+        } catch (error) {
+            console.error("Update settings error:", error);
+            throw error;
+        }
+    };
+
     const value = {
         posts,
         featuredPosts,
@@ -146,7 +178,9 @@ export const BlogProvider = ({ children }) => {
         logout,
         createPost,
         uploadImage,
-        deletePost
+        deletePost,
+        breakingNews,
+        updateBreakingNews
     };
 
     return <BlogContext.Provider value={value}>{children}</BlogContext.Provider>;
