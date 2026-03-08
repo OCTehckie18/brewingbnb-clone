@@ -116,7 +116,7 @@ const AdminDashboard = () => {
                     <div className="space-y-10">
                         {/* Breaking News Section */}
                         <div className="bg-[var(--secondary-background-color)] p-8 rounded-lg shadow-lg h-fit">
-                            <h2 className="text-xl font-bold text-[var(--light-color)] mb-6">Update Breaking News</h2>
+                            <h2 className="text-xl font-bold text-[var(--light-color)] mb-6">Update Breaking News [IN DEVELOPMENT]</h2>
                             {settingsMessage && <div className={`p-4 mb-6 rounded ${settingsMessage.includes('Error') ? 'bg-red-500/20 text-red-200' : 'bg-green-500/20 text-green-200'}`}>{settingsMessage}</div>}
                             <form onSubmit={handleUpdateHeadline} className="space-y-4">
                                 <div>
@@ -199,7 +199,7 @@ const AdminDashboard = () => {
                                 </div>
 
                                 <div>
-                                    <label className="block text-[var(--light-color-alt)] text-sm mb-2">Image</label>
+                                    <label className="block text-[var(--light-color-alt)] text-sm mb-2">Image - variable</label>
                                     <input
                                         type="file"
                                         accept="image/*"

@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import { useBlog } from '../../context/BlogContext';
 
 const FeaturedContent = () => {
-    const { featuredPosts, posts, loading } = useBlog();
+    const { featuredPosts, posts, loading, breakingNews } = useBlog();
 
     // Fallback if no featured posts are marked explicitly
     const displayPosts = featuredPosts.length > 0 ? featuredPosts : posts.slice(0, 3);
-    const breakingNews = "Apple announces a new partnership..."; // Could also be dynamic later
 
     if (loading) {
         return <div className="lg:col-span-2 h-96 flex items-center justify-center text-[var(--light-color)]">Loading featured content...</div>;
